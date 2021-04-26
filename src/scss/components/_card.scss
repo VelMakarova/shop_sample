@@ -1,0 +1,152 @@
+.cards {
+  padding: 30px 20px;
+}
+
+.cards-content {
+  @extend .container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards-title {
+  font-family: 'Poppins-Regular', sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.cards-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 385px;
+  grid-gap: 20px;
+  margin-bottom: 20px;
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: $breakpoint-desktop-s) {
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 80px;
+  }
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  font-family: 'Poppins-Regular', sans-serif;
+  position: relative;
+  border: 1px solid $light-gray;
+  @media (min-width: $breakpoint-desktop-s) {
+    border: 1px solid transparent;
+    padding: 20px;
+    &:hover {
+      border-color: $light-gray;
+    }
+  }
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.card-to-fav {
+  @extend %btn;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  height: 22px;
+  width: 22px;
+  padding: 0;
+  color: $light-gray;
+  &:hover,
+  &.is-active {
+    color: darken($pink, 20%);
+  }
+}
+
+.card-img {
+  @extend .media;
+  flex: 1 1 auto;
+}
+
+.card-info {
+  flex: 0 0 auto;
+  margin-top: 20px;
+  z-index: 10;
+}
+
+.card-name {
+  font-size: 18px;
+}
+
+.card-manufacturer {
+  font-size: 14px;
+  text-transform: uppercase;
+  @include themify($themes) {
+    color: themed('textSubcolor');
+  }
+}
+
+.card-price {
+  position: relative;
+  margin-top: 23px;
+  font-size: 20px;
+  @media (min-width: $breakpoint-desktop-s) {
+    font-size: 24px;
+  }
+}
+
+.card-old-price {
+  position: absolute;
+  bottom: 23px;
+  text-decoration: line-through;
+  @include themify($themes) {
+    color: themed('textSubcolor');
+  }
+}
+
+.card-to-cart {
+  @extend %btn;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  padding: 10px;
+  border: 1px solid $black;
+  background-color: $white;
+  color: $black;
+  text-transform: uppercase;
+  @media (min-width: $breakpoint-desktop-s) {
+    right: 20px;
+    bottom: 20px;
+    padding: 10px 20px;
+  }
+
+  &:hover {
+    background-color: $black;
+    color: $white;
+  }
+  .card-item:hover & {
+    display: block;
+  }
+}
+
+.card-shown-btn {
+  @extend %btn;
+  padding: 0 10px;
+  color: rgba($black, .5);
+  border-bottom: 1px solid transparent;
+  &:hover {
+    border-color: rgba($black, .5);
+  }
+}

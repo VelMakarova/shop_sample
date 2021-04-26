@@ -1,0 +1,59 @@
+.user-content {
+  @extend .container;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+
+  @media (min-width: $breakpoint-desktop-s) {
+    padding-top: 40px;
+  }
+}
+
+.user-tabs {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-tabs-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-tabs-links {
+  flex: 0 0 auto;
+  display: flex;
+  border-bottom: 1px solid $light-gray;
+}
+
+.user-tab-link {
+  position: relative;
+  display: flex;
+  margin-right: 20px;
+  padding: 10px 0;
+
+  @include themify($themes) {
+    color: themed('textColor');
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background-color: $black;
+    width: 0;
+    transition: all .2s ease;
+  }
+
+  &.active:after {
+    width: 100%;
+  }
+
+  @media (min-width: $breakpoint-desktop-s) {
+    margin-right: 200px;
+  }
+}

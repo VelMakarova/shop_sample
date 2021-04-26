@@ -1,0 +1,64 @@
+.banner {
+  background-color: $light-gray;
+}
+
+.banner-content {
+  @extend.container;
+  display: grid;
+  grid-template-rows: 180px 250px;
+  grid-template-columns: 1fr;
+  padding: 0 20px;
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-rows: 350px;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 54px;
+  }
+}
+
+.banner-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (min-width: $breakpoint-desktop-s) {
+    padding-left: 110px;
+  }
+}
+
+.banner-title {
+  font-family: 'Poppins-ExtraBold', sans-serif;
+  font-size: 28px;
+  line-height: 24px;
+  @media (min-width: $breakpoint-tablet) {
+    font-size: 48px;
+    line-height: 44px;
+  }
+}
+
+.banner-subtitle {
+  font-family: 'Poppins-Regular', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  @media (min-width: $breakpoint-tablet) {
+    font-size: 40px;
+    line-height: 44px;
+  }
+}
+
+.banner-btn {
+  @extend .btn-primary;
+  align-self: flex-start;
+  margin-top: 32px;
+}
+
+.banner-illustration {
+  @extend .media;
+  height: 100%;
+}
+
+.banner-img {
+  @extend .img;
+  max-width: 425px;
+  left: auto;
+  right: 0;
+}

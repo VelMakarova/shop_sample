@@ -1,0 +1,74 @@
+.nav {
+  flex: 0 0 auto;
+  @media (min-width: $breakpoint-tablet) {
+    border-bottom: 1px solid $light-gray;
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: $breakpoint-tablet) {
+    justify-content: center;
+    flex-direction: row;
+  }
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  color: $black;
+  font-family: 'Poppins-Light', sans-serif;
+  font-size: 12px;
+  @media (min-width: $breakpoint-tablet) {
+    justify-content: center;
+    padding: 19px 25px;
+  }
+  @include themify($themes) {
+    color: themed('textColor');
+  }
+}
+
+.subnav-dropdown {
+  position: absolute;
+  top: 20px;
+  right: 3px;
+  border: 1px solid $light-gray;
+  padding: 10px;
+  border-radius: 4px;
+  opacity: 0;
+  box-shadow: 0 1px 6px rgba(#ccc, 8%);
+  transition: all .2s ease;
+  &.is-open {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+  @include themify($themes) {
+    background-color: themed('backgroundColor');
+  }
+}
+
+.subnav-list {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subnav-btn {
+  @extend %btn;
+}
+
+.subnav-option {
+  height: 20px;
+  width: 20px;
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+
+.subnav-link {
+  @include themify($themes) {
+    color: themed('iconColor');
+  }
+}

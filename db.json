@@ -1,0 +1,222 @@
+{
+  "users": [
+    {
+      "email": "valeria@gmail.com",
+      "password": "$2a$10$MvFi4tHya8x7igC7/h2bmuMZOMn7odraHveCVbUPsuDLT9J26FK.a",
+      "userName": "Valeria",
+      "userLastName": "Shevchenko",
+      "userCart": [],
+      "userFavs": [],
+      "userLanguage": "",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbGVyaWFAZ21haWwuY29tIiwiaWF0IjoxNjE3MDk5NzI4LCJleHAiOjE2MTcxMDMzMjgsInN1YiI6IjEifQ.1nisPwG8VfQnsTp8nSUmKEWezMwrELBEisJe_dXde84",
+      "id": 1
+    }
+  ],
+  "user": {
+    "email": "valeria@gmail.com",
+    "password": "$2a$10$MvFi4tHya8x7igC7/h2bmuMZOMn7odraHveCVbUPsuDLT9J26FK.a",
+    "userName": "Valeria",
+    "userLastName": "Shevchenko",
+    "userCart": [
+      {
+        "productName": "Matte LIP KITS ",
+        "productManufacturer": "Kylie Cosmetics",
+        "productDescription": "lorem",
+        "productPrice": 15,
+        "productDiscount": 0,
+        "productImg": "./img/products/item4.png",
+        "productQuantity": 1,
+        "productId": 4
+      }
+    ],
+    "userFavs": [
+      {
+        "productName": "Double Mascara",
+        "productManufacturer": "nyx",
+        "productDescription": "",
+        "productPrice": 35,
+        "productDiscount": 0,
+        "productImg": "./img/products/item1.png",
+        "productQuantity": 1,
+        "productId": 1
+      },
+      {
+        "productName": "Baume de Rose",
+        "productManufacturer": "terry",
+        "productDescription": "lorem ipsum",
+        "productPrice": 43,
+        "productDiscount": 0,
+        "productImg": "./img/products/item2.png",
+        "productQuantity": 1,
+        "productId": 2
+      }
+    ],
+    "userLanguage": "",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbGVyaWFAZ21haWwuY29tIiwiaWF0IjoxNjE3MTE4OTAzLCJleHAiOjE2MTcxMjI1MDMsInN1YiI6IjEifQ.ZHcf5-D-ayAJFf6ZIPlNL6D3_taC6657qlYiJMpSNho",
+    "userId": 1
+  },
+  "products": [
+    {
+      "id": 1,
+      "productName": "Double Mascara",
+      "productManufacturer": "nyx",
+      "productDescription": "",
+      "productPrice": 35,
+      "productDiscount": 0,
+      "productImg": "./img/products/item1.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 2,
+      "productName": "Baume de Rose",
+      "productManufacturer": "terry",
+      "productDescription": "lorem ipsum",
+      "productPrice": 43,
+      "productDiscount": 0,
+      "productImg": "./img/products/item2.png",
+      "productCategory": "care"
+    },
+    {
+      "id": 3,
+      "productName": "Unu Tonne de Roses",
+      "productManufacturer": "parle moi",
+      "productDescription": "lorem",
+      "productPrice": 80,
+      "productDiscount": 15,
+      "productImg": "./img/products/item3.png",
+      "productCategory": "perfumes"
+    },
+    {
+      "id": 4,
+      "productName": "Matte LIP KITS ",
+      "productManufacturer": "Kylie Cosmetics",
+      "productDescription": "lorem",
+      "productPrice": 15,
+      "productDiscount": 0,
+      "productImg": "./img/products/item4.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 5,
+      "productName": "Floral Toner",
+      "productManufacturer": "FRENCH GIRL",
+      "productDescription": "lorem",
+      "productPrice": 35,
+      "productDiscount": 0,
+      "productImg": "./img/products/item5.png",
+      "productCategory": "organic"
+    },
+    {
+      "id": 6,
+      "productName": "Si",
+      "productManufacturer": "giorgio armani ",
+      "productDescription": "lorem",
+      "productPrice": 90,
+      "productDiscount": 10,
+      "productImg": "./img/products/item6.png",
+      "productCategory": "perfumes",
+      "productFav": false
+    },
+    {
+      "id": 7,
+      "productName": "Nail Polish",
+      "productManufacturer": "rimmel",
+      "productDescription": "lorem",
+      "productPrice": 10,
+      "productDiscount": 0,
+      "productImg": "./img/products/item7.png",
+      "productCategory": "makeup",
+      "productFav": false
+    },
+    {
+      "id": 8,
+      "productName": "Powder Pouope",
+      "productManufacturer": "nyx",
+      "productDescription": "lorem",
+      "productPrice": 12,
+      "productDiscount": 10,
+      "productImg": "./img/products/item8.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 9,
+      "productName": "Exfoliating Instant Mask",
+      "productManufacturer": "goop",
+      "productDescription": "lorem lorem",
+      "productPrice": 16,
+      "productDiscount": 0,
+      "productImg": "./img/products/item9.png",
+      "productCategory": "organic"
+    },
+    {
+      "id": 10,
+      "productName": "Cleansing Wash",
+      "productManufacturer": "french girl",
+      "productDescription": "lorem",
+      "productPrice": 30,
+      "productDiscount": 5,
+      "productImg": "./img/products/item10.png",
+      "productCategory": "care"
+    },
+    {
+      "id": 11,
+      "productName": "Aromatics in White",
+      "productManufacturer": "Clinique",
+      "productDescription": "lorem",
+      "productPrice": 10,
+      "productDiscount": 0,
+      "productImg": "./img/products/item11.png",
+      "productCategory": "perfumes"
+    },
+    {
+      "id": 12,
+      "productName": "Red Lipstick",
+      "productManufacturer": "NA",
+      "productDescription": "lorem",
+      "productPrice": 17,
+      "productDiscount": 0,
+      "productImg": "./img/products/item12.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 13,
+      "productName": "Sea Soak",
+      "productManufacturer": "French girl",
+      "productDescription": "lorem",
+      "productPrice": 67,
+      "productDiscount": 5,
+      "productImg": "./img/products/item13.png",
+      "productCategory": "organic"
+    },
+    {
+      "id": 14,
+      "productName": "Primer Base",
+      "productManufacturer": "nyx",
+      "productDescription": "lorem",
+      "productPrice": 27,
+      "productDiscount": 5,
+      "productImg": "./img/products/item14.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 15,
+      "productName": "Profesional Powder",
+      "productManufacturer": "hd",
+      "productDescription": "lorem",
+      "productPrice": 12,
+      "productDiscount": 0,
+      "productImg": "./img/products/item15.png",
+      "productCategory": "makeup"
+    },
+    {
+      "id": 16,
+      "productName": "Intense I -Color",
+      "productManufacturer": "almay",
+      "productDescription": "lorem",
+      "productPrice": 25,
+      "productDiscount": 10,
+      "productImg": "./img/products/item16.png",
+      "productCategory": "makeup"
+    }
+  ]
+}

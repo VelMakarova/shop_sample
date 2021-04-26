@@ -1,0 +1,75 @@
+.categories {
+  padding: 30px 20px;
+  min-width: 0%;
+}
+.categories-content {
+  @extend .container;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows:  120px 120px 130px 130px;
+  grid-template-areas: 'perfumes makeup'
+                       'perfumes care'
+                       'organic organic'
+                       'organic organic';
+  grid-gap: 20px;
+  padding: 0;
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: repeat(2, 142px);
+    grid-template-areas: 'perfumes organic makeup'
+                         'perfumes organic care';
+  }
+  @media (min-width: $breakpoint-desktop-s) {
+    grid-template-columns: 300px 1fr 300px;
+    grid-template-rows: repeat(2, 265px);
+    grid-template-areas: 'perfumes organic makeup'
+                        'perfumes organic care';
+    grid-gap: 20px 36px;
+  }
+}
+
+.categories-item {
+  &.perfumes {
+    grid-area: perfumes;
+  }
+  &.organic {
+    grid-area: organic;
+    min-width: 0%;
+  }
+  &.makeup {
+    grid-area: makeup;
+  }
+  &.care {
+    grid-area: care;
+  }
+}
+
+.categories-link {
+  position: relative;
+}
+
+.categories-label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+  font-family: 'Poppins-Regular', sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: $black;
+  @media (min-width: $breakpoint-tablet) {
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+  }
+  @media (min-width: $breakpoint-desktop-s) {
+    font-size: 24px;
+  }
+}
+
+.categories-img {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

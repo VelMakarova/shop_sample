@@ -1,0 +1,129 @@
+.slider-content {
+  @extend .container;
+  padding: 0;
+  &.slider-main {
+    height: 400px;
+    padding-bottom: 40px;
+    @media (min-width: $breakpoint-desktop-s) {
+      height: 600px;
+      padding-bottom: 60px;
+    }
+  }
+  &.slider-insta {
+    padding-bottom: 60px;
+    @media (min-width: $breakpoint-tablet) {
+      padding-bottom: 80px;
+    }
+  }
+}
+
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide > div {
+  height: 100%;
+}
+
+.slider-insta {
+  height: 350px;
+  @media (min-width: $breakpoint-tablet) {
+    height: 480px;
+  }
+}
+
+.slider-media {
+  @extend .media;
+  height: 100%;
+}
+
+.slider-img {
+  @extend .img;
+}
+
+.slick-dots  {
+  .slider-insta & {
+    bottom: -40px;
+  }
+}
+
+//slide
+
+.slide {
+  position: relative;
+  height: 100%;
+  display: flex !important;
+  &.to-left {
+    justify-content: flex-start;
+  }
+  &.to-right {
+    justify-content: flex-end;
+  }
+  &.to-center {
+    justify-content: center;
+  }
+}
+
+.slide-img {
+  @extend .img;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.slide-content {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  max-width: 250px;
+  @media (min-width: $breakpoint-desktop-s) {
+    max-width: 450px;
+  }
+  .to-left & {
+    margin-left: 50px;
+    align-items: flex-start;
+    @media (min-width: $breakpoint-desktop-s) {
+      margin-left: 180px;
+    }
+  }
+  .to-right & {
+    margin-right: 50px;
+    align-items: flex-end;
+    @media (min-width: $breakpoint-desktop-s) {
+      margin-right: 180px;
+    }
+  }
+  .to-center & {
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.slide-title {
+  font-family: 'Poppins-Regular', sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 15px;
+  @media (min-width: $breakpoint-desktop-s) {
+    font-size: 44px;
+    line-height: 52px;
+    margin-bottom: 44px;
+  }
+}
+
+.slide-description {
+  font-family: 'Poppins-Light', sans-serif;
+  font-size: 14px;
+  @media (min-width: $breakpoint-desktop-s) {
+    font-size: 16px;
+  }
+}
+
+.slide-btn {
+  @extend .btn-primary;
+  margin-top: 15px;
+  @media (min-width: $breakpoint-desktop-s) {
+    margin-top: 44px;
+  }
+}

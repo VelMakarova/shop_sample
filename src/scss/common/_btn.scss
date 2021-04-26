@@ -1,0 +1,47 @@
+%btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 12px 60px;
+  cursor: pointer;
+  &:disabled,
+  &.is-disabled {
+    cursor: default;
+  }
+}
+
+%btn-fullwidth {
+  width: 100%;
+}
+
+.btn-primary {
+  @extend %btn;
+  font-size: 18px;
+  background-color: $green;
+  color: $white;
+  text-transform: uppercase;
+  border-radius: 6px;
+  box-shadow: inset -2.1px -2.1px 2px 0 rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: darken($green, 10%);
+  }
+  .login-form &,
+  .cart-control-total & {
+    @extend %btn-fullwidth;
+  }
+}
+
+.btn-outline {
+  @extend %btn;
+  font-size: 18px;
+  border: 1px solid $black;
+  border-radius: 6px;
+  background-color: $white;
+  &:hover {
+    color: $green;
+    border-color: $green;
+  }
+  .cart-control-continue & {
+    @extend %btn-fullwidth;
+  }
+}

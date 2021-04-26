@@ -1,0 +1,34 @@
+.collapse {
+  margin-bottom: 20px;
+}
+
+.collapse-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collapse-title {
+  @extend .text-truncate;
+  max-width: 300px;
+}
+
+.collapse-trigger {
+  @extend %btn;
+  height: 15px;
+  width: 15px;
+  padding: 0;
+  transition: all .2s ease;
+  .is-open &.has-icon {
+    transform: rotate(-180deg)
+  }
+}
+
+.collapse-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .2s ease;
+  .is-open & {
+    max-height: 200px;
+    transition: all .2s ease;
+  }
+}

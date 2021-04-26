@@ -1,0 +1,26 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex: 0 0 auto;
+  padding: 35px 0;
+  border-bottom: 1px solid $light-gray;
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
+.header-content {
+  @extend .container;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr auto 1fr;
+  }
+}
+
+.header-controls {
+  display: flex;
+}

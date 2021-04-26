@@ -1,0 +1,90 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+  color: $black;
+  font-family: 'Poppins-Regular', sans-serif;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+*,
+*:active,
+*:focus {
+  outline: none;
+}
+
+.text-truncate {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+%visuallyhidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+.visually-hidden {
+  @extend %visuallyhidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba($green, .2);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: $green;
+}
+
+.list {
+  border: 1px solid;
+  width: 300px;
+  .item > & {
+    display: none;
+  }
+  .item:hover > & {
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 100%;
+  }
+}
+
+.item {
+  position: relative;
+}

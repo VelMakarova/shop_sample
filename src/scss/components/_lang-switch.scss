@@ -1,0 +1,48 @@
+.lang-switch {
+  position: relative;
+  display: flex;
+  margin-right: 20px;
+}
+
+.lang-switch-trigger {
+  position: relative;
+  padding-right: 15px;
+  text-transform: uppercase;
+  color: $gray;
+  cursor: pointer;
+}
+
+.lang-switch-arrow {
+  @extend %icon;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lang-switch-dropdown {
+  position: absolute;
+  top: 25px;
+  left: -10px;
+  z-index: 1;
+  width: 100px;
+  max-height: 0;
+  overflow: hidden;
+  box-shadow: 0 5px 25px 0 rgba(17, 28, 96, 0.11);
+  .lang-switch.is-open & {
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 5px 0;
+    max-height: 150px;
+    @include themify($themes) {
+      background-color: themed('backgroundColor');
+    }
+  }
+}
+
+.lang-switch-option {
+  padding: 3px 10px;
+  text-transform: uppercase;
+  color: $gray;
+  cursor: pointer;
+}
