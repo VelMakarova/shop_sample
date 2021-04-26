@@ -1,18 +1,8 @@
-import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  TOGGLE_FAV,
-  THEME_TOGGLE,
-  DECREASE_QUANTITY,
-  INCREASE_QUANTITY,
-  LOGIN_USER,
-  FETCH_USER,
-  SIGNOUT_USER,
-} from '../types';
+import * as ReduxTypes from '../types';
 import { history } from '../Router';
 import { BASE_URL } from '../constants/database';
 import routes from '../constants/routes';
-import { CartProduct, IProduct, IAction } from '../interfaces';
+import * as types from '../interfaces';
 
 const USER_PATH = `${BASE_URL}${routes.USER_ROUTE}`;
 
@@ -25,7 +15,7 @@ export function switchLanguage(type: string, language: string) {
 
 export function switchTheme(theme: boolean) {
   return {
-    type: THEME_TOGGLE,
+    type: ReduxTypes.THEME_TOGGLE,
     payload: theme,
   };
 }
@@ -38,7 +28,7 @@ export function isMobileToggle(type: string, value: boolean) {
 }
 
 export function fetchData(type: string, path: string) {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.DataAction) => void): Promise<void> => {
     const response = await fetch(path);
     const json = await response.json();
     dispatch({ type: type, payload: json });
@@ -46,13 +36,13 @@ export function fetchData(type: string, path: string) {
 }
 
 export function changeQuantity(type: string, id: number) {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.QuantityAction) => void): Promise<void> => {
     const user = await (await fetch(USER_PATH)).json();
     const cartArray = user.userCart;
     const cartItem = cartArray.find(
-      (item: CartProduct) => item.productId === id
+      (item: types.CartProduct) => item.productId === id
     );
-    if (type === INCREASE_QUANTITY) {
+    if (type === ReduxTypes.INCREASE_QUANTITY) {
       ++cartItem.productQuantity;
       const response = await (
         await fetch(USER_PATH, {
@@ -63,10 +53,10 @@ export function changeQuantity(type: string, id: number) {
           body: JSON.stringify({ userCart: cartArray }),
         })
       ).json();
-      dispatch({ type: INCREASE_QUANTITY, payload: response.userCart });
+      dispatch({ type: ReduxTypes.INCREASE_QUANTITY, payload: response.userCart });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
-    } else if (type === DECREASE_QUANTITY) {
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
+    } else if (type === ReduxTypes.DECREASE_QUANTITY) {
       --cartItem.productQuantity;
       const response = await (
         await fetch(USER_PATH, {
@@ -78,19 +68,20 @@ export function changeQuantity(type: string, id: number) {
         })
       ).json();
 
-      dispatch({ type: DECREASE_QUANTITY, payload: response.userCart });
+      dispatch({ type: ReduxTypes.DECREASE_QUANTITY, payload: response.userCart });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
     }
   };
 }
 
-export function addToCart(item: IProduct, id: number) {
-  return async (dispatch: any) => {
+export function addToCart(item: types.Product, id: number) {
+  debugger
+  return async (dispatch: (arg: types.AddCartAction) => void): Promise<void> => {
     const user = await (await fetch(USER_PATH)).json();
     const cartArray = user.userCart;
     const cartItem = cartArray.find(
-      (item: CartProduct) => item.productId === id
+      (item: types.CartProduct) => item.productId === id
     );
     if (cartItem) {
       ++cartItem.productQuantity;
@@ -102,9 +93,9 @@ export function addToCart(item: IProduct, id: number) {
         body: JSON.stringify({ userCart: cartArray }),
       });
       const json = await response.json();
-      dispatch({ type: INCREASE_QUANTITY, payload: json });
+      dispatch({ type: ReduxTypes.INCREASE_QUANTITY, payload: json });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
     } else {
       const newCartItem = {
         productName: item.productName,
@@ -125,18 +116,18 @@ export function addToCart(item: IProduct, id: number) {
         body: JSON.stringify({ userCart: cartArray }),
       });
       const json = await response.json();
-      dispatch({ type: ADD_TO_CART, payload: json.userCart });
+      dispatch({ type: ReduxTypes.ADD_TO_CART, payload: json.userCart });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
     }
   };
 }
 
 export function removeFromCart(id: number) {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.RemoveCartAction) => void): Promise<void> => {
     const user = await (await fetch(USER_PATH)).json();
     const cart = user.userCart;
-    const index = cart.findIndex((item: CartProduct) => item.productId === id);
+    const index = cart.findIndex((item: types.CartProduct) => item.productId === id);
     cart.splice(index, 1);
     const response = await fetch(USER_PATH, {
       method: 'PATCH',
@@ -145,22 +136,22 @@ export function removeFromCart(id: number) {
       },
       body: JSON.stringify({ userCart: cart }),
     });
-    dispatch({ type: REMOVE_FROM_CART, payload: cart });
+    dispatch({ type: ReduxTypes.REMOVE_FROM_CART, payload: cart });
     const newUser = await (await fetch(USER_PATH)).json();
-    dispatch({ type: FETCH_USER, payload: newUser });
+    dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
   };
 }
 
-export function toggleFavorites(item: IProduct) {
-  return async (dispatch: any) => {
+export function toggleFavorites(item: types.Product) {
+  return async (dispatch: (arg: types.FavsToggleAction)=> void): Promise<void> => {
     const user = await (await fetch(USER_PATH)).json();
     const favsArray = user.userFavs;
     const favItem = favsArray.find(
-      (favsArrayItem: CartProduct) => favsArrayItem.productId === item.id
+      (favsArrayItem: types.CartProduct) => favsArrayItem.productId === item.id
     );
     if (favItem) {
       const index = favsArray.findIndex(
-        (favsitem: CartProduct) => favsitem.productId === item.id
+        (favsitem: types.CartProduct) => favsitem.productId === item.id
       );
       favsArray.splice(index, 1);
       const response = await (
@@ -172,9 +163,9 @@ export function toggleFavorites(item: IProduct) {
           body: JSON.stringify({ userFavs: favsArray }),
         })
       ).json();
-      dispatch({ type: TOGGLE_FAV, payload: response.userFavs });
+      dispatch({ type: ReduxTypes.TOGGLE_FAV, payload: response.userFavs });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
     } else {
       const newFavItem = {
         productName: item.productName,
@@ -196,15 +187,16 @@ export function toggleFavorites(item: IProduct) {
           body: JSON.stringify({ userFavs: favsArray }),
         })
       ).json();
-      dispatch({ type: TOGGLE_FAV, payload: response.userFavs });
+      dispatch({ type: ReduxTypes.TOGGLE_FAV, payload: response.userFavs });
       const newUser = await (await fetch(USER_PATH)).json();
-      dispatch({ type: FETCH_USER, payload: newUser });
+      dispatch({ type: ReduxTypes.FETCH_USER, payload: newUser });
     }
   };
 }
 
-export function registerUser(user: any) {
-  return async (dispatch: any): Promise<void> => {
+export function registerUser(user: types.User) {
+  debugger
+  return async (dispatch: (arg: types.RegisterAction) => void): Promise<void> => {
     try {
       const response = await fetch(`${BASE_URL}${routes.REGISTER_ROUTE}`, {
         method: 'POST',
@@ -219,7 +211,6 @@ export function registerUser(user: any) {
           userCart: user.userCart,
           userFavs: user.userFavs,
           userLanguage: user.userLanguage,
-          accessToken: user.accessToken,
         }),
       });
       const json = await response.json();
@@ -247,7 +238,7 @@ export function registerUser(user: any) {
           }),
         });
         const userParsed = await userResponse.json();
-        dispatch({ type: LOGIN_USER, payload: userParsed });
+        dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
         history.push(routes.INDEX);
       }
     } catch (error) {
@@ -257,7 +248,7 @@ export function registerUser(user: any) {
 }
 
 export function loginUser(user: any) {
-  return async (dispatch: any): Promise<void> => {
+  return async (dispatch: (arg: types.LoginAction) => void): Promise<void> => {
     try {
       const response = await fetch(`${BASE_URL}${routes.LOGIN_ROUTE}`, {
         method: 'POST',
@@ -295,7 +286,7 @@ export function loginUser(user: any) {
           }),
         });
         const userParsed = await userResponse.json();
-        dispatch({ type: LOGIN_USER, payload: userParsed });
+        dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
         history.push(routes.INDEX);
       }
     } catch (error) {
@@ -305,15 +296,15 @@ export function loginUser(user: any) {
 }
 
 export function fetchUser() {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.FetchUserAction) => void): Promise<void> => {
     const response = await fetch(USER_PATH);
     const json = await response.json();
-    dispatch({ type: FETCH_USER, payload: json });
+    dispatch({ type: ReduxTypes.FETCH_USER, payload: json });
   };
 }
 
 export function signoutUser() {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.SignoutAction) => void): Promise<void> => {
     const getUserResponse = await fetch(USER_PATH);
     const getUserResponseParse = await getUserResponse.json();
     const setUserData = await fetch(
@@ -347,14 +338,14 @@ export function signoutUser() {
       }),
     });
     const json = await response.json();
-    dispatch({ type: SIGNOUT_USER, payload: json });
+    dispatch({ type: ReduxTypes.SIGNOUT_USER, payload: json });
     window.localStorage.removeItem('accessToken');
     history.push(routes.LOGIN_ROUTE);
   };
 }
 
 export function fetchUserData(type: string, dataKey: string) {
-  return async (dispatch: any) => {
+  return async (dispatch: (arg: types.FetchUserDataAction) => void): Promise<void> => {
     const response = await fetch(USER_PATH);
     const json = await response.json();
     const data = json[dataKey];

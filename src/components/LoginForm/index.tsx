@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../actions';
-import { ILoginForm } from '../../interfaces';
+import { LoginForm as LoginFormInterface } from '../../interfaces';
 
 const initForm = {
   email: '',
@@ -10,7 +10,7 @@ const initForm = {
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [form, changeForm] = useState<ILoginForm>(initForm);
+  const [form, changeForm] = useState<LoginFormInterface>(initForm);
 
   const onInputChange = ({ target }: any) => changeForm({ ...form, [target.name]: target.value });
 

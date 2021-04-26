@@ -8,7 +8,7 @@ import Layout from '../../components/Layout';
 import routes from '../../constants/routes';
 import { ADD_TO_CART } from '../../constants/btns';
 import { RootState } from '../../reducers/rootReducer';
-import { IProduct } from '../../interfaces/index';
+import { Product } from '../../interfaces/index';
 import { FETCH_FAV_DATA } from '../../types/index';
 
 const Favorites = () => {
@@ -21,15 +21,15 @@ const Favorites = () => {
   }, []);
 
   const addToCartHandler = (id: number) => {
-    let targetElement = favs.filter((item: IProduct) => item.id === id)[0];
+    let targetElement = favs.filter((item: Product) => item.id === id)[0];
     dispatch(addToCart(targetElement, id));
   };
 
   const productsItems = () => {
-    return favs?.map((item: IProduct, index: number) => {
+    return favs?.map((item: Product, index: number) => {
       const discountPrice =
         item.productPrice - item.productPrice * (item.productDiscount / 100);
-        const isFav = favs?.find((favItem: any) => favItem.productId === item.id);
+        const isFav = favs?.find((favItem: Product) => favItem.id === item.id);
       return (
         <li key={index} className="card-item">
           <Link

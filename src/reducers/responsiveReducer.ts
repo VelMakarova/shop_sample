@@ -1,11 +1,11 @@
 import { IS_MOBILE, IS_DESKTOP } from '../types';
-import { IResponsiveState, IAction } from '../interfaces/index';
+import { ResponsiveState, Action } from '../interfaces/index';
 
-const initialState: IResponsiveState = {
+const initialState: ResponsiveState = {
   isMobile: false,
 };
 
-export const responsiveReducer = (state = initialState, action: IAction) => {
+export const responsiveReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case IS_MOBILE:
       return { ...state, isMobile: action.payload };

@@ -9,7 +9,7 @@ export interface CartProduct {
   productId: number;
 }
 
-export interface IProduct {
+export interface Product {
   id: number;
   productName: string;
   productManufacturer: string;
@@ -20,32 +20,94 @@ export interface IProduct {
   productCategory: string;
 }
 
-export interface IProducts {
-  products: IProduct[];
+export interface Products {
+  products: Product[];
+}
+
+export interface User {
+  email: string,
+  password: string,
+  userCart: CartProduct[],
+  userFavs: Product[],
+  userLanguage: string,
+  userLastName: string,
+  userName: string
+}
+
+export interface Action {
+  type: string;
+  payload: any
 }
 
 export interface IFavs {
-  favs: IProduct[];
+  favs: Product[];
 }
 
 export interface CartProducts {
   cart: CartProduct[];
 }
 
-export interface IAction {
+export interface DataAction {
   type: string;
   payload: any;
 }
 
-export interface IThemeState {
+export interface QuantityAction {
+  type: string;
+  payload: any;
+}
+
+export interface AddCartAction {
+  type: string;
+  payload: CartProduct;
+}
+
+export interface RemoveCartAction {
+  type: string;
+  payload: CartProduct;
+}
+
+export interface FavsToggleAction {
+  type: string;
+  payload: any;
+}
+
+export interface RegisterAction {
+  type: string;
+  payload: any;
+}
+
+export interface LoginAction {
+  type: string;
+  payload: any;
+}
+
+export interface FetchUserAction {
+  type: string;
+  payload: any;
+}
+
+export interface SignoutAction {
+  type: string;
+  payload: any;
+}
+
+export interface FetchUserDataAction {
+  type: string;
+  payload: any;
+}
+
+
+
+export interface ThemeState {
   isLight: boolean;
 }
 
-export interface ILangState {
+export interface LangState {
   language: string;
 }
 
-export interface IResponsiveState {
+export interface ResponsiveState {
   isMobile: boolean;
 }
 
@@ -55,11 +117,11 @@ export interface User {
   userName: string;
   userLastName: string;
   userCart: CartProduct[];
-  userFavs: [];
+  userFavs: Product[];
   userLanguage: string;
 }
 
-export interface IRegisterForm {
+export interface RegisterForm {
   email: string;
   password: string;
   confirmPass: string;
@@ -67,7 +129,7 @@ export interface IRegisterForm {
   userLastName: string;
 }
 
-export interface ILoginForm {
+export interface LoginForm {
   email: string;
   password: string;
 }

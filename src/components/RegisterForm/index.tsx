@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { registerUser } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { ENG } from '../../constants/languages';
-import { User, IRegisterForm } from '../../interfaces';
+import { User } from '../../interfaces';
+import { RegisterForm as RegisterFormInterface } from '../../interfaces';
 
 const initForm = {
   email: '',
@@ -14,7 +15,7 @@ const initForm = {
 
 const RegisterForm: React.FC<{}> = () => {
   const dispatch = useDispatch();
-  const [form, changeForm] = useState<IRegisterForm>(initForm)
+  const [form, changeForm] = useState<RegisterFormInterface>(initForm)
 
   const registerHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

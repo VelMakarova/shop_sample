@@ -1,12 +1,12 @@
 import { SHOW_ENG, SHOW_RUS } from '../types';
 import { ENG } from '../constants/languages';
-import { ILangState, IAction } from '../interfaces/index';
+import { LangState, Action } from '../interfaces/index';
 
-const initialState: ILangState = {
+const initialState: LangState = {
   language: ENG,
 };
 
-export const langReducer = (state = initialState, action: IAction) => {
+export const langReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case SHOW_ENG:
       return { ...state, language: action.payload };

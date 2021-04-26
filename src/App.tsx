@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import MainRouter from './Router';
 import { useDispatch } from 'react-redux';
-import { fetchData, fetchUser, fetchUserData } from './actions';
-import { FETCH_PRODUCTS, FETCH_CART_DATA, FETCH_FAV_DATA } from './types';
+import { fetchData, fetchUser } from './actions';
+import { FETCH_PRODUCTS } from './types';
 import { BASE_URL } from './constants/database';
 import routes from './constants/routes';
 

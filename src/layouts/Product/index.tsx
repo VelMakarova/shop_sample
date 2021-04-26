@@ -7,7 +7,7 @@ import Layout from '../../components/Layout';
 import { ADD_TO_CART, ADD_TO_FAVS } from '../../constants/btns';
 import Collapse from '../../components/Collapse';
 import { RootState } from '../../reducers/rootReducer';
-import { IProduct } from '../../interfaces';
+import { Product as ProductInterface } from '../../interfaces';
 
 interface ParamTypes {
   id: string;
@@ -17,12 +17,12 @@ const Product: React.FC = () => {
   const { id } = useParams<ParamTypes>();
   const item = useSelector((state: RootState) =>
     state.products.products.find(
-      (product: IProduct) => String(product.id) === id
+      (product: ProductInterface) => String(product.id) === id
     )
   );
   const dispatch = useDispatch();
 
-  const toggleFavHandler = (item: IProduct) => {
+  const toggleFavHandler = (item: ProductInterface) => {
     dispatch(toggleFavorites(item));
   };
 

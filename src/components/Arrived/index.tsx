@@ -7,7 +7,7 @@ import SECTION_TITLES from '../../constants/sectionsTitles';
 import { ITEMS_AMOUNT } from '../../constants/settings';
 import routes from '../../constants/routes';
 import { addToCart, toggleFavorites, fetchUser, fetchUserData } from '../../actions';
-import { IProduct } from '../../interfaces';
+import { Product } from '../../interfaces';
 import { RootState } from '../../reducers/rootReducer';
 import { FETCH_FAV_DATA } from '../../types';
 
@@ -24,23 +24,21 @@ const Arrived: React.FC = () => {
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(fetchUserData(FETCH_FAV_DATA, 'userFavs'));
-  }, [])
+  }, [dispatch])
 
   const addToCartHandler = (id: number) => {
-    const targetElement = products.findIndex((item: IProduct) => item.id === id);
-    dispatch(addToCart( targetElement, id));
+    const targetElement = products.findIndex((item: Product) => item.id === id);
+    dispatch(addToCart(targetElement, id));
   };
 
-  const toggleFavHandler = (item: IProduct) => {
+  const toggleFavHandler = (item: Product) => {
     dispatch(toggleFavorites(item));
     dispatch(fetchUser())
   };
 
   const productsItems = () => {
-    return products?.slice(0, amount).map((item: IProduct) => {
-      console.log('favs', favs)
+    return products?.slice(0, amount).map((item: Product) => {
       const isFav = favs?.find((favItem: any) => favItem.productId === item.id);
-      console.log('isFav', isFav)
       return (
         <li key={item.id} className="card-item">
           <Link

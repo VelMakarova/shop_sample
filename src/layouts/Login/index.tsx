@@ -8,7 +8,7 @@ const Login: React.FC = () => {
 
   return (
     <LoginLayout>
-      <LoginForm />
+      <RegisterForm />
     </LoginLayout>
   );
 };

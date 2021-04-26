@@ -1,11 +1,11 @@
 import { THEME_TOGGLE } from '../types';
-import { IAction, IThemeState } from '../interfaces';
+import { Action, ThemeState } from '../interfaces';
 
-const initialState: IThemeState = {
+const initialState: ThemeState = {
   isLight: true,
 };
 
-export const themeReducer = (state = initialState, action: IAction) => {
+export const themeReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case THEME_TOGGLE:
       return { ...state, isLight: action.payload };

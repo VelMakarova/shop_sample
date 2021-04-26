@@ -1,9 +1,9 @@
-import { IProducts, IAction } from '../interfaces';
+import { Products, DataAction } from '../interfaces';
 import { FETCH_PRODUCTS } from '../types/index';
 
-const initialState: IProducts = { products: [] };
+const initialState: Products = { products: [] };
 
-export const dataReducer = (state = initialState, action: IAction) => {
+export const dataReducer = (state = initialState, action: DataAction) => {
   switch (action.type) {
     case FETCH_PRODUCTS:
       return { ...state, products: action.payload };

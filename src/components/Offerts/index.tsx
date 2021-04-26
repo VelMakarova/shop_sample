@@ -8,7 +8,7 @@ import { addToCart, toggleFavorites } from '../../actions';
 import { ITEMS_AMOUNT } from '../../constants/settings';
 import routes from '../../constants/routes';
 import { RootState } from '../../reducers/rootReducer';
-import { IProduct } from '../../interfaces';
+import { Product } from '../../interfaces';
 
 const Offert: React.FC = () => {
   const [discountProducts, setDiscountProducts] = useState([]);
@@ -22,26 +22,26 @@ const Offert: React.FC = () => {
 
   useEffect(() => {
     setDiscountProducts(
-      products?.filter((item: IProduct) => item.productDiscount > 0)
+      products?.filter((item: Product) => item.productDiscount > 0)
     );
   }, [products]);
 
   const addToCartHandler = (id: number) => {
-    const targetElement = products.find((item: IProduct) => item.id === id);
+    const targetElement = products.find((item: Product) => item.id === id);
     dispatch(addToCart(targetElement, id));
   };
 
-  const toggleFavHandler = (item: IProduct) => {
+  const toggleFavHandler = (item: Product) => {
     dispatch(toggleFavorites(item));
   };
 
   const productsItems = () => {
     return discountProducts
       ?.slice(0, amount)
-      .map((item: IProduct, index: number) => {
+      .map((item: Product, index: number) => {
         const discountPrice =
           item.productPrice - item.productPrice * (item.productDiscount / 100);
-        const isFav = favs?.find((favItem: any) => favItem.productId === item.id);
+        const isFav = favs?.find((favItem: Product) => favItem.id === item.id);
         return (
           <li key={index} className="card-item">
             <Link
