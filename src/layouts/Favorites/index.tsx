@@ -21,7 +21,7 @@ const Favorites = () => {
   }, []);
 
   const addToCartHandler = (id: number) => {
-    let targetElement = favs.filter((item: Product) => item.id === id)[0];
+    let targetElement = favs.find((item: Product) => item.id === id)[0];
     dispatch(addToCart(targetElement, id));
   };
 

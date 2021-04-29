@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef, MutableRefObject } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaArrowUp } from 'react-icons/fa';
 import { isMobileToggle } from '../../actions';
 import { IS_MOBILE, IS_DESKTOP } from '../../types';
 import Header from '../Header';
@@ -10,15 +10,16 @@ import MobileMenu from '../MobileMenu';
 import { RootState } from '../../reducers/rootReducer';
 
 interface LayoutProps {
-  children: any;
+  children: React.ReactChild;
 }
 
-const Layout: React.FC<LayoutProps> = (props: any) => {
-  const { isMobile } = useSelector((state: RootState) => state.isMobile);
+const Layout: React.FC<LayoutProps> = (props) => {
   const dispatch = useDispatch();
+  const { isMobile } = useSelector((state: RootState) => state.isMobile);
   const isLight = useSelector((state: RootState) => state.theme.isLight);
-  const themeClass = isLight ? 'theme-light' : 'theme-dark';
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const themeClass: string = isLight ? 'theme-light' : 'theme-dark';
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  let isLinkVisible = useRef<boolean>(false);
 
   const setIsMobile = useCallback(() => {
     if (window.innerWidth < 768) {
@@ -28,6 +29,15 @@ const Layout: React.FC<LayoutProps> = (props: any) => {
     }
   }, [dispatch]);
 
+  const showLinkToTop = useCallback((e) => {
+    const scrollTop = e.target.scrollingElement.scrollTop;
+    if(scrollTop > 100) {
+      isLinkVisible.current = false;
+    } else {
+      isLinkVisible.current = true;
+    }
+  }, [])
+
   useEffect(() => {
     setIsMobile();
     window.addEventListener('resize', setIsMobile);
@@ -35,6 +45,13 @@ const Layout: React.FC<LayoutProps> = (props: any) => {
       window.removeEventListener('resize', setIsMobile);
     };
   }, [setIsMobile]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', showLinkToTop);
+    return () => {
+      window.removeEventListener('scroll', showLinkToTop);
+    }
+  }, [])
 
   return (
     <div className={`theme-container ${themeClass}`}>
@@ -44,6 +61,9 @@ const Layout: React.FC<LayoutProps> = (props: any) => {
         {props.children}
         <Footer />
       </div>
+      <a href="#header" className={`link-to-top has-icon ${isLinkVisible ? '' : 'is-hidden'}`}>
+        <FaArrowUp />
+      </a>
     </div>
   );
 };

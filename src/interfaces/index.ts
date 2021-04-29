@@ -97,8 +97,6 @@ export interface FetchUserDataAction {
   payload: any;
 }
 
-
-
 export interface ThemeState {
   isLight: boolean;
 }

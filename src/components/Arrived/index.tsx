@@ -17,7 +17,6 @@ const Arrived: React.FC = () => {
   const { products } = useSelector((state: RootState) => state.products);
   const favs = useSelector((state: RootState) => state.user.user.userFavs);
   const [shownItemsAmount, showAll] = useState(false);
-  const [favsArr, setFavsArr] = useState([]);
   const amount = shownItemsAmount ? products.length : ITEMS_AMOUNT;
   const viewBtnContent = shownItemsAmount ? VIEW_LESS : VIEW_MORE;
 
@@ -27,7 +26,7 @@ const Arrived: React.FC = () => {
   }, [dispatch])
 
   const addToCartHandler = (id: number) => {
-    const targetElement = products.findIndex((item: Product) => item.id === id);
+    const targetElement = products.find((item: Product) => item.id === id);
     dispatch(addToCart(targetElement, id));
   };
 

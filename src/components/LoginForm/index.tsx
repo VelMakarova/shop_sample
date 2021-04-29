@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../actions';
 import { LoginForm as LoginFormInterface } from '../../interfaces';
+import routes from '../../constants/routes';
 
 const initForm = {
   email: '',
@@ -10,6 +12,7 @@ const initForm = {
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+
   const [form, changeForm] = useState<LoginFormInterface>(initForm);
 
   const onInputChange = ({ target }: any) => changeForm({ ...form, [target.name]: target.value });
@@ -53,6 +56,10 @@ const LoginForm = () => {
         <div className="form-inbut-border" />
       </div>
       <button className="btn-primary">Log in</button>
+      <div className="login-reference">
+        Haven't account yet? 
+        <Link to={routes.SIGNUP_ROUTE}> Go here to signup</Link>
+      </div>
     </form>
   );
 };

@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, isMenuOpen }) => {
   const isOpenClass = isOpen ? 'is-open' : '';
 
   return (
-    <header className="header">
+    <header className="header" id="header">
       <div className="header-content">
         {isMobile ? null : (
           <div className="header-controls">

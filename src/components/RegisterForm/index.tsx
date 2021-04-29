@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { ENG } from '../../constants/languages';
 import { User } from '../../interfaces';
 import { RegisterForm as RegisterFormInterface } from '../../interfaces';
+import routes from '../../constants/routes';
 
 const initForm = {
   email: '',
@@ -15,23 +17,25 @@ const initForm = {
 
 const RegisterForm: React.FC<{}> = () => {
   const dispatch = useDispatch();
+  const [error, setError] = useState('');
   const [form, changeForm] = useState<RegisterFormInterface>(initForm)
 
   const registerHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newUser: User = {
-      email: form.email,
-      password: form.password,
-      userName: form.userName,
-      userLastName: form.userLastName,
-      userCart: [],
-      userFavs: [],
-      userLanguage: ENG,
-    }
-  
     if (form.password === form.confirmPass) {
+      const newUser: User = {
+        email: form.email,
+        password: form.password,
+        userName: form.userName,
+        userLastName: form.userLastName,
+        userCart: [],
+        userFavs: [],
+        userLanguage: ENG,
+      }
       dispatch( registerUser(newUser));
+    } else {
+      setError('Passwords must be equal')
     }
   }
   const onInputChange = ({ target }: any) => changeForm({ ...form, [target.name]: target.value })
@@ -116,6 +120,11 @@ const RegisterForm: React.FC<{}> = () => {
       >
         Sign in
       </button>
+      <div className="login-reference">
+        Have you already had an account? 
+        <Link to={routes.LOGIN_ROUTE}> Go here to log in.</Link>
+      </div>
+      <div className="login-error">{error}</div>
     </form>
   );
 };

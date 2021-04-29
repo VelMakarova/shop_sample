@@ -23,3 +23,6 @@ export const FETCH_USER = 'FETCH_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const SIGNOUT_USER = 'SIGNOUT_USER';
+
+export const USER_ALREADY_EXIST = 'USER_ALREADY_EXIST';
+export const WRONG_CREDENTIALS = 'WRONG_CREDENTIALS';

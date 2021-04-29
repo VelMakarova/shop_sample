@@ -76,7 +76,6 @@ export function changeQuantity(type: string, id: number) {
 }
 
 export function addToCart(item: types.Product, id: number) {
-  debugger
   return async (dispatch: (arg: types.AddCartAction) => void): Promise<void> => {
     const user = await (await fetch(USER_PATH)).json();
     const cartArray = user.userCart;
@@ -129,7 +128,7 @@ export function removeFromCart(id: number) {
     const cart = user.userCart;
     const index = cart.findIndex((item: types.CartProduct) => item.productId === id);
     cart.splice(index, 1);
-    const response = await fetch(USER_PATH, {
+    await fetch(USER_PATH, {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -195,102 +194,97 @@ export function toggleFavorites(item: types.Product) {
 }
 
 export function registerUser(user: types.User) {
-  debugger
   return async (dispatch: (arg: types.RegisterAction) => void): Promise<void> => {
-    try {
-      const response = await fetch(`${BASE_URL}${routes.REGISTER_ROUTE}`, {
-        method: 'POST',
+    const response = await fetch(`${BASE_URL}${routes.REGISTER_ROUTE}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        userName: user.userName,
+        userLastName: user.userLastName,
+        userCart: user.userCart,
+        userFavs: user.userFavs,
+        userLanguage: user.userLanguage,
+      }),
+    });
+    const json = await response.json();
+    if (response.status === 201) {
+      const getUser = await fetch(
+        `${BASE_URL}${routes.USERS_ROUTE}?email=${user.email}`
+      );
+      const getUserListParsed = await getUser.json();
+      const getUserParsed = getUserListParsed[0];
+      const userResponse = await fetch(USER_PATH, {
+        method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-type': 'application/json; charset=UTF-8',
         },
         body: JSON.stringify({
-          email: user.email,
-          password: user.password,
-          userName: user.userName,
-          userLastName: user.userLastName,
-          userCart: user.userCart,
-          userFavs: user.userFavs,
-          userLanguage: user.userLanguage,
+          email: getUserParsed.email,
+          password: getUserParsed.password,
+          userName: getUserParsed.userName,
+          userLastName: getUserParsed.userLastName,
+          userCart: getUserParsed.userCart,
+          userFavs: getUserParsed.userFavs,
+          userLanguage: getUserParsed.userLanguage,
+          accessToken: json.accessToken,
+          userId: getUserParsed.id,
         }),
       });
-      const json = await response.json();
-      if (response.status === 201) {
-        const getUser = await fetch(
-          `${BASE_URL}${routes.USERS_ROUTE}?email=${user.email}`
-        );
-        const getUserListParsed = await getUser.json();
-        const getUserParsed = getUserListParsed[0];
-        const userResponse = await fetch(USER_PATH, {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-          body: JSON.stringify({
-            email: getUserParsed.email,
-            password: getUserParsed.password,
-            userName: getUserParsed.userName,
-            userLastName: getUserParsed.userLastName,
-            userCart: getUserParsed.userCart,
-            userFavs: getUserParsed.userFavs,
-            userLanguage: getUserParsed.userLanguage,
-            accessToken: json.accessToken,
-            userId: getUserParsed.id,
-          }),
-        });
-        const userParsed = await userResponse.json();
-        dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
-        history.push(routes.INDEX);
-      }
-    } catch (error) {
-      console.error(error);
+      const userParsed = await userResponse.json();
+      dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
+      history.push(routes.INDEX);
+    } else if (response.status === 400) {
+      dispatch({type: ReduxTypes.USER_ALREADY_EXIST, payload: json})
     }
   };
 }
 
-export function loginUser(user: any) {
+export function loginUser(user: types.LoginForm) {
   return async (dispatch: (arg: types.LoginAction) => void): Promise<void> => {
-    try {
-      const response = await fetch(`${BASE_URL}${routes.LOGIN_ROUTE}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: user.email,
-          password: user.password,
-        }),
-      });
+    const response = await fetch(`${BASE_URL}${routes.LOGIN_ROUTE}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+      }),
+    });
+    if (response.ok) {
       const json = await response.json();
       localStorage.setItem('accessToken', json.accessToken);
-      if (response.ok) {
-        const getUser = await fetch(
-          `${BASE_URL}${routes.USERS_ROUTE}?email=${user.email}`
-        );
-        const getUserListParsed = await getUser.json();
-        const getUserParsed = getUserListParsed[0];
-        const userResponse = await fetch(USER_PATH, {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-          body: JSON.stringify({
-            email: getUserParsed.email,
-            password: getUserParsed.password,
-            userName: getUserParsed.userName,
-            userLastName: getUserParsed.userLastName,
-            userCart: getUserParsed.userCart,
-            userFavs: getUserParsed.userFavs,
-            userLanguage: getUserParsed.userLanguage,
-            accessToken: json.accessToken,
-            userId: getUserParsed.id,
-          }),
-        });
-        const userParsed = await userResponse.json();
-        dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
-        history.push(routes.INDEX);
-      }
-    } catch (error) {
-      console.error(error);
+      const getUser = await fetch(
+        `${BASE_URL}${routes.USERS_ROUTE}?email=${user.email}`
+      );
+      const getUserListParsed = await getUser.json();
+      const getUserParsed = getUserListParsed[0];
+      const userResponse = await fetch(USER_PATH, {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({
+          email: getUserParsed.email,
+          password: getUserParsed.password,
+          userName: getUserParsed.userName,
+          userLastName: getUserParsed.userLastName,
+          userCart: getUserParsed.userCart,
+          userFavs: getUserParsed.userFavs,
+          userLanguage: getUserParsed.userLanguage,
+          accessToken: json.accessToken,
+          userId: getUserParsed.id,
+        }),
+      });
+      const userParsed = await userResponse.json();
+      dispatch({ type: ReduxTypes.LOGIN_USER, payload: userParsed });
+      history.push(routes.INDEX);
+    } else if (response.status === 400) {
+      dispatch({type: ReduxTypes.WRONG_CREDENTIALS, payload: 'Wrong login or password'})
     }
   };
 }
@@ -305,9 +299,9 @@ export function fetchUser() {
 
 export function signoutUser() {
   return async (dispatch: (arg: types.SignoutAction) => void): Promise<void> => {
-    const getUserResponse = await fetch(USER_PATH);
-    const getUserResponseParse = await getUserResponse.json();
-    const setUserData = await fetch(
+    debugger
+    const getUserResponseParse = (await (await fetch(USER_PATH)).json());
+    await fetch(
       `${BASE_URL}${routes.USERS_ROUTE}/${getUserResponseParse.userId}`,
       {
         method: 'PATCH',
@@ -316,7 +310,7 @@ export function signoutUser() {
         },
         body: JSON.stringify({
           userCart: getUserResponseParse.userCart,
-          userFavs: getUserResponseParse.userFav,
+          userFavs: getUserResponseParse.userFavs,
           userLanguage: getUserResponseParse.userLanguage,
         }),
       }

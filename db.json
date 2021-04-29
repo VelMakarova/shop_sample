@@ -7,14 +7,12 @@
       "userLastName": "Shevchenko",
       "userCart": [
         {
-          "productQuantity": 2,
-          "productId": 1
-        },
-        {
-          "productQuantity": 1,
-          "productId": 2
-        },
-        {
+          "productName": "Si",
+          "productManufacturer": "giorgio armani ",
+          "productDescription": "lorem",
+          "productPrice": 90,
+          "productDiscount": 10,
+          "productImg": "./img/products/item6.png",
           "productQuantity": 1,
           "productId": 6
         }
@@ -33,38 +31,89 @@
       "userFavs": [],
       "userLanguage": "ENG",
       "id": 2
+    },
+    {
+      "email": "valeria22@gmail.com",
+      "password": "$2a$10$oyWvXowkhxMxIyDEaYoUJekAvoA0bm6100qxiYlqgxpFVDPO0BoSG",
+      "userName": "Mary",
+      "userLastName": "Poppins",
+      "userCart": [],
+      "userFavs": [],
+      "userLanguage": "ENG",
+      "id": 3
+    },
+    {
+      "email": "valeri22@gmail.com",
+      "password": "$2a$10$hmZL7o76poSsAEa1mm5/i.1dgZtBguqtlgQI2Gh8K9sNkepIj7rZe",
+      "userName": "Vel",
+      "userLastName": "Vel",
+      "userCart": [],
+      "userFavs": [
+        {
+          "productName": "Baume de Rose",
+          "productManufacturer": "terry",
+          "productDescription": "lorem ipsum",
+          "productPrice": 43,
+          "productDiscount": 0,
+          "productImg": "./img/products/item2.png",
+          "productQuantity": 1,
+          "productId": 2
+        },
+        {
+          "productName": "Double Mascara",
+          "productManufacturer": "nyx",
+          "productDescription": "",
+          "productPrice": 35,
+          "productDiscount": 0,
+          "productImg": "./img/products/item1.png",
+          "productQuantity": 1,
+          "productId": 1
+        },
+        {
+          "productName": "Unu Tonne de Roses",
+          "productManufacturer": "parle moi",
+          "productDescription": "lorem",
+          "productPrice": 80,
+          "productDiscount": 15,
+          "productImg": "./img/products/item3.png",
+          "productQuantity": 1,
+          "productId": 3
+        },
+        {
+          "productName": "Matte LIP KITS ",
+          "productManufacturer": "Kylie Cosmetics",
+          "productDescription": "lorem",
+          "productPrice": 15,
+          "productDiscount": 0,
+          "productImg": "./img/products/item4.png",
+          "productQuantity": 1,
+          "productId": 4
+        }
+      ],
+      "userLanguage": "ENG",
+      "id": 4
     }
   ],
   "user": {
-    "email": "",
-    "password": "",
-    "userName": "",
-    "userLastName": "",
-    "userCart": [],
-    "userFavs": [
+    "email": "valeria@gmail.com",
+    "password": "$2a$10$MvFi4tHya8x7igC7/h2bmuMZOMn7odraHveCVbUPsuDLT9J26FK.a",
+    "userName": "Valeria",
+    "userLastName": "Shevchenko",
+    "userCart": [
       {
-        "productName": "Baume de Rose",
-        "productManufacturer": "terry",
-        "productDescription": "lorem ipsum",
-        "productPrice": 43,
-        "productDiscount": 0,
-        "productImg": "./img/products/item2.png",
-        "productQuantity": 1,
-        "productId": 2
-      },
-      {
-        "productName": "Unu Tonne de Roses",
-        "productManufacturer": "parle moi",
+        "productName": "Si",
+        "productManufacturer": "giorgio armani ",
         "productDescription": "lorem",
-        "productPrice": 80,
-        "productDiscount": 15,
-        "productImg": "./img/products/item3.png",
+        "productPrice": 90,
+        "productDiscount": 10,
+        "productImg": "./img/products/item6.png",
         "productQuantity": 1,
-        "productId": 3
+        "productId": 6
       }
     ],
+    "userFavs": [],
     "userLanguage": "",
-    "accessToken": "",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbGVyaWFAZ21haWwuY29tIiwiaWF0IjoxNjE5NjM1OTA3LCJleHAiOjE2MTk2Mzk1MDcsInN1YiI6IjEifQ.AwPm-Q-JlOK9DQkwvGJkhO1bYxN3tj7hHClIWPH9Es0",
     "userId": 1
   },
   "products": [

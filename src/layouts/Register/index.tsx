@@ -1,14 +1,14 @@
 import React from 'react';
 import LoginLayout from './../../components/LoginLayout';
-import LoginForm from './../../components/LoginForm';
+import RegisterForm from '../../components/RegisterForm';
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
 
   return (
     <LoginLayout>
-      <LoginForm />
+      <RegisterForm />
     </LoginLayout>
   );
 };
 
-export default Login;
+export default Register;

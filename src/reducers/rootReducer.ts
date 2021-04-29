@@ -4,6 +4,7 @@ import { dataReducer } from './dataReducer';
 import { themeReducer } from './themeReducer';
 import { responsiveReducer } from './responsiveReducer';
 import { userReducer } from './userReducer';
+import { errorReducer } from './errorReducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   products: dataReducer,
   theme: themeReducer,
   isMobile: responsiveReducer,
+  error: errorReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

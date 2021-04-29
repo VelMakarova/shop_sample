@@ -6,6 +6,7 @@ export default {
   PRODUCTS_ROUTE: '/products',
   PRODUCT_ROUTE: '/product',
   LOGIN_ROUTE: '/login',
+  SIGNUP_ROUTE: '/signup',
   REGISTER_ROUTE: '/register',
   USER_ROUTE: '/user',
   USERS_ROUTE: '/users',
