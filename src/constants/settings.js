@@ -1,1 +1,0 @@
-export const ITEMS_AMOUNT = 8;

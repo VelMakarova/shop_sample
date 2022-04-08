@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react'; 
-import { Router, Switch, Route } from 'react-router';
-import Main from './layouts/Main';
-import Cart from './layouts/Cart';
-import Empty from './layouts/Empty';
-import Favorites from './layouts/Favorites';
-import Product from './layouts/Product';
-import User from './layouts/User';
-import Login from './layouts/Login';
-import Register from './layouts/Register';
-import routes from './constants/routes';
-import { createBrowserHistory } from 'history';
+import React, { useEffect } from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Main from "./pages/Main";
+import Cart from "./pages/Cart";
+import Empty from "./pages/Empty";
+import Favorites from "./pages/Favorites";
+import Product from "./pages/Product";
+import User from "./pages/User";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Section from "./pages/Section";
+import routes from "./navigation/routes";
 
 export const history = createBrowserHistory();
 
 const MainRouter = () => {
-
   useEffect(() => {
-    const token = window.localStorage.getItem('accessToken');
+    const token = window.localStorage.getItem("accessToken");
     if (token) {
       history.push(routes.INDEX);
     } else {
-      history.push(routes.LOGIN_ROUTE)
+      history.push(routes.LOGIN_ROUTE);
     }
-  })
+  }, []);
 
-  return (    
+  return (
     <Router history={history}>
       <Switch>
         <Route path={routes.USER_ROUTE} component={User} />
@@ -32,12 +32,13 @@ const MainRouter = () => {
         <Route path={routes.LOGIN_ROUTE} component={Login} />
         <Route path={routes.FAV_ROUTE} component={Favorites} />
         <Route path={routes.CART_ROUTE} component={Cart} />
-        <Route path={`${routes.PRODUCT_ROUTE}/:id`} component={Product} />
+        <Route path={`${routes.SECTION_ROUTE}/:section`} component={Section} />
+        <Route path={`${routes.PRODUCTS_ROUTE}/:id`} component={Product} />
         <Route path={routes.INDEX} exact component={Main} />
         <Route component={Empty} />
       </Switch>
     </Router>
-    )
+  );
 };
 
 export default MainRouter;

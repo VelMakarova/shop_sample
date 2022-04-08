@@ -29,6 +29,10 @@
   @include themify($themes) {
     color: themed('textColor');
   }
+
+  &:hover {
+    color: $green;
+  }
 }
 
 .subnav-dropdown {
@@ -41,10 +45,12 @@
   opacity: 0;
   box-shadow: 0 1px 6px rgba(#ccc, 8%);
   transition: all .2s ease;
+
   &.is-open {
     transform: translateY(20px);
     opacity: 1;
   }
+
   @include themify($themes) {
     background-color: themed('backgroundColor');
   }
@@ -62,6 +68,7 @@
 .subnav-option {
   height: 20px;
   width: 20px;
+
   &:not(:last-child) {
     margin-right: 12px;
   }

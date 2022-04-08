@@ -1,29 +1,32 @@
-import React from 'react';
-import { FaInstagram, FaTwitter, FaGoogle, FaFacebook } from 'react-icons/fa';
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { FaInstagram, FaTwitter, FaGoogle, FaFacebook } from "react-icons/fa";
 
 const Footer: React.FC = () => {
+  const date = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="footer-content">
         <ul className="footer-nav">
           <li className="footer-nav-item">
             <a href="/" className="footer-nav-link">
-              Our Advantages
+              <FormattedMessage id="footer_nav_advantages" />
             </a>
           </li>
           <li className="footer-nav-item">
             <a href="/" className="footer-nav-link">
-              Payment and Delivery
+              <FormattedMessage id="footer_nav_payments" />
             </a>
           </li>
           <li className="footer-nav-item">
             <a href="/" className="footer-nav-link">
-              Cooperation
+              <FormattedMessage id="footer_nav_cooperation" />
             </a>
           </li>
           <li className="footer-nav-item">
             <a href="/" className="footer-nav-link">
-              Contacts
+              <FormattedMessage id="footer_nav_contacts" />
             </a>
           </li>
         </ul>
@@ -49,7 +52,10 @@ const Footer: React.FC = () => {
             </a>
           </li>
         </ul>
-        <div className="footer-info">&#169; 2020</div>
+        <div className="footer-info">
+          &#169;
+          {date}
+        </div>
       </div>
     </footer>
   );

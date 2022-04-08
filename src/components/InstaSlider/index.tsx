@@ -1,10 +1,10 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
 
-import girl1 from '../../../public/img/girls/1.png';
-import girl2 from '../../../public/img/girls/2.png';
-import girl3 from '../../../public/img/girls/3.png';
-import girl4 from '../../../public/img/girls/4.png';
+import girl1 from "../../../public/img/girls/1.png";
+import girl2 from "../../../public/img/girls/2.png";
+import girl3 from "../../../public/img/girls/3.png";
+import girl4 from "../../../public/img/girls/4.png";
 
 function InstaSlider() {
   const sliderSettings = {
@@ -35,6 +35,7 @@ function InstaSlider() {
   };
   return (
     <div className="slider-content slider-insta">
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...sliderSettings}>
         <div className="slider-media">
           <img className="slider-img" src={girl1} alt="insta" />

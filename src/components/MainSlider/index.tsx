@@ -1,26 +1,26 @@
-import React from 'react';
-import SLIDES from '../../constants/mainSlider';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
+import SLIDES from "../../constants/mainSlider";
 
 const MainSlider: React.FC = () => {
-  const getSlides = () => {
-    return SLIDES.map((item, index) => {
+  const getSlides = () =>
+    SLIDES.map((item) => {
       let position;
       switch (item.slideContentPosition) {
-        case 'right':
-          position = 'to-right';
+        case "right":
+          position = "to-right";
           break;
-        case 'left':
-          position = 'to-left';
+        case "left":
+          position = "to-left";
           break;
-        case 'center':
-          position = 'to-center';
+        case "center":
+          position = "to-center";
           break;
         default:
-          position = 'to-left';
+          position = "to-left";
       }
       return (
-        <div key={index} className={`slide ${position}`}>
+        <div key={position} className={`slide ${position}`}>
           <img
             className="slide-img"
             src={item.slideImg}
@@ -29,12 +29,13 @@ const MainSlider: React.FC = () => {
           <div className="slide-content">
             <div className="slide-title">{item.slideTitle}</div>
             <div className="slide-description">{item.slideContent}</div>
-            <button className="slide-btn">{item.slideBtn}</button>
+            <button type="button" className="slide-btn">
+              {item.slideBtn}
+            </button>
           </div>
         </div>
       );
     });
-  };
   const sliderSettings = {
     dots: true,
     arrows: false,
@@ -42,6 +43,7 @@ const MainSlider: React.FC = () => {
 
   return (
     <div className="slider-content slider-main">
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...sliderSettings}>{getSlides()}</Slider>
     </div>
   );

@@ -1,6 +1,7 @@
 .slider-content {
   @extend .container;
   padding: 0;
+
   &.slider-main {
     height: 400px;
     padding-bottom: 40px;
@@ -9,6 +10,7 @@
       padding-bottom: 60px;
     }
   }
+
   &.slider-insta {
     padding-bottom: 60px;
     @media (min-width: $breakpoint-tablet) {
@@ -40,7 +42,7 @@
   @extend .img;
 }
 
-.slick-dots  {
+.slick-dots {
   .slider-insta & {
     bottom: -40px;
   }
@@ -52,12 +54,15 @@
   position: relative;
   height: 100%;
   display: flex !important;
+
   &.to-left {
     justify-content: flex-start;
   }
+
   &.to-right {
     justify-content: flex-end;
   }
+
   &.to-center {
     justify-content: center;
   }
@@ -79,6 +84,7 @@
   @media (min-width: $breakpoint-desktop-s) {
     max-width: 450px;
   }
+
   .to-left & {
     margin-left: 50px;
     align-items: flex-start;
@@ -86,6 +92,7 @@
       margin-left: 180px;
     }
   }
+
   .to-right & {
     margin-right: 50px;
     align-items: flex-end;
@@ -93,6 +100,7 @@
       margin-right: 180px;
     }
   }
+
   .to-center & {
     align-items: center;
     margin: 0 auto;

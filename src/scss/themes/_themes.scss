@@ -1,18 +1,18 @@
 $themes: (
-  light: (
-    backgroundColor: $white,
-    textColor: $black,
-    textSubcolor: $dark-gray,
-    iconColor: $gray,
-    cartBorderColor: $black,
-    cartBgColor: $white
-  ),
-  dark: (
-    backgroundColor: $dark-gray,
-    textColor: $white,
-    textSubcolor: $light-gray,
-    iconColor: $light-gray,
-    cartBorderColor: $white,
-    cartBgColor: $black
-  )
+        light: (
+                backgroundColor: $white,
+                textColor: $black,
+                textSubcolor: $dark-gray,
+                iconColor: $gray,
+                cartBorderColor: $black,
+                cartBgColor: $white
+        ),
+        dark: (
+                backgroundColor: $dark-gray,
+                textColor: $white,
+                textSubcolor: $light-gray,
+                iconColor: $light-gray,
+                cartBorderColor: $white,
+                cartBgColor: $black
+        )
 )

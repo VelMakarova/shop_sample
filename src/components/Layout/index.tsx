@@ -1,69 +1,78 @@
-import React, { useEffect, useCallback, useState, useRef, MutableRefObject } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { FaArrowUp } from 'react-icons/fa';
-import { isMobileToggle } from '../../actions';
-import { IS_MOBILE, IS_DESKTOP } from '../../types';
-import Header from '../Header';
-import Nav from '../Nav';
-import Footer from '../Footer';
-import MobileMenu from '../MobileMenu';
-import { RootState } from '../../reducers/rootReducer';
+import React, { useEffect, useCallback, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { FaArrowUp } from "react-icons/fa";
+import { isMobileToggle } from "../../store/ui/actions";
+import Header from "../Header";
+import Nav from "../Nav";
+import Footer from "../Footer";
+import MobileMenu from "../MobileMenu";
+import { RootState } from "../../store/rootReducer";
 
 interface LayoutProps {
   children: React.ReactChild;
 }
 
-const Layout: React.FC<LayoutProps> = (props) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const win: Window = window;
   const dispatch = useDispatch();
-  const { isMobile } = useSelector((state: RootState) => state.isMobile);
-  const isLight = useSelector((state: RootState) => state.theme.isLight);
-  const themeClass: string = isLight ? 'theme-light' : 'theme-dark';
+  const isMobile = useSelector((state: RootState) => state.uiSettings.isMobile);
+  const isDark = useSelector(
+    (state: RootState) => state.uiSettings.isDarkTheme
+  );
+  const themeClass: string = isDark ? "theme-dark" : "theme-light";
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  let isLinkVisible = useRef<boolean>(false);
+  const [isLinkVisible, setIsLinkVisible] = useState<boolean>(true);
 
   const setIsMobile = useCallback(() => {
     if (window.innerWidth < 768) {
-      dispatch(isMobileToggle(IS_MOBILE, true));
+      dispatch(isMobileToggle(true));
     } else {
-      dispatch(isMobileToggle(IS_DESKTOP, false));
+      dispatch(isMobileToggle(false));
     }
   }, [dispatch]);
 
-  const showLinkToTop = useCallback((e) => {
-    const scrollTop = e.target.scrollingElement.scrollTop;
-    if(scrollTop > 100) {
-      isLinkVisible.current = false;
+  const scrollTop = (): void => {
+    document.documentElement.scrollTop = 0;
+  };
+
+  const showLinkToTop = useCallback(() => {
+    if (document.documentElement.scrollTop > 100) {
+      setIsLinkVisible(true);
     } else {
-      isLinkVisible.current = true;
+      setIsLinkVisible(false);
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    win.addEventListener("scroll", showLinkToTop);
+    return () => win.removeEventListener("scroll", showLinkToTop);
+  }, [showLinkToTop, win]);
 
   useEffect(() => {
     setIsMobile();
-    window.addEventListener('resize', setIsMobile);
+    win.addEventListener("resize", setIsMobile);
     return () => {
-      window.removeEventListener('resize', setIsMobile);
+      win.removeEventListener("resize", setIsMobile);
     };
-  }, [setIsMobile]);
-
-  useEffect(() => {
-    window.addEventListener('scroll', showLinkToTop);
-    return () => {
-      window.removeEventListener('scroll', showLinkToTop);
-    }
-  }, [])
+  }, [setIsMobile, win]);
 
   return (
     <div className={`theme-container ${themeClass}`}>
       <div className="page-container">
         <Header isMenuOpen={isMenuOpen} setMenuOpen={setIsMenuOpen} />
         {isMobile ? <MobileMenu isMenuOpen={isMenuOpen} /> : <Nav />}
-        {props.children}
+        {children}
         <Footer />
       </div>
-      <a href="#header" className={`link-to-top has-icon ${isLinkVisible ? '' : 'is-hidden'}`}>
-        <FaArrowUp />
-      </a>
+      {isLinkVisible && (
+        <button
+          type="button"
+          className="link-to-top has-icon"
+          onClick={scrollTop}
+        >
+          <FaArrowUp />
+        </button>
+      )}
     </div>
   );
 };

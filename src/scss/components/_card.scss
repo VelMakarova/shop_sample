@@ -69,6 +69,7 @@
   width: 22px;
   padding: 0;
   color: $light-gray;
+
   &:hover,
   &.is-active {
     color: darken($pink, 20%);
@@ -136,6 +137,7 @@
     background-color: $black;
     color: $white;
   }
+
   .card-item:hover & {
     display: block;
   }
@@ -146,6 +148,7 @@
   padding: 0 10px;
   color: rgba($black, .5);
   border-bottom: 1px solid transparent;
+
   &:hover {
     border-color: rgba($black, .5);
   }

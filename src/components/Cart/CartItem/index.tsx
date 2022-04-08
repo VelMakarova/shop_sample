@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
-import { MdClose } from 'react-icons/md';
-import { fetchUser, removeFromCart, changeQuantity } from '../../../actions';
-import { INCREASE_QUANTITY, DECREASE_QUANTITY } from '../../../types';
-import { CartProduct } from '../../../interfaces';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
+import { removeFromCart, changeQuantity } from "../../../store/cart/actions";
+import {
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY,
+} from "../../../store/cart/actionTypes";
+import { CartProduct } from "../../../types";
 
 interface CartItemProps {
   propsData: CartProduct;
 }
 
 const initial: CartProduct = {
-  productName: '',
-  productManufacturer: '',
-  productDescription: '',
-  productPrice: 0,
-  productDiscount: 0,
-  productImg: '',
-  productQuantity: 0,
+  id: -0,
+  name: "",
+  manufacturer: "",
+  price: 0,
+  discount: 0,
+  description: "",
+  img: "",
+  quantity: 0,
   productId: 0,
 };
 
@@ -27,13 +31,13 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
 
   const removeFromCartHandler = (id: number) => {
     dispatch(removeFromCart(id));
-    dispatch(fetchUser());
   };
 
   const changeQuantityHandler = (type: string, id: number) => {
-    if (type === DECREASE_QUANTITY && item.productQuantity === 1) {
+    if (type === DECREASE_QUANTITY && item.quantity === 1) {
+      // eslint-disable-next-line no-alert
       const agreeToDelete = window.confirm(
-        'The item will be removed from the cart. Are you sure you want to continue?'
+        "The item will be removed from the cart. Are you sure you want to continue?"
       );
       if (agreeToDelete) {
         removeFromCartHandler(id);
@@ -44,32 +48,23 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
   };
 
   const showPrice = (item: CartProduct) => {
-    if (item.productDiscount) {
+    if (item.discount) {
       return (
         <>
-          <div className="cart-cell-old-price">{item.productPrice}$</div>
+          <div className="cart-cell-old-price">{item.price}$</div>
           <div className="cart-cell-actual-price">
-            {item.productPrice -
-              item.productPrice * (item.productDiscount / 100)}
-            $
+            {item.price - item.price * (item.discount / 100)}$
           </div>
         </>
       );
-    } else {
-      return <div className="cart-cell-actual-price">{item.productPrice}$</div>;
     }
+    return <div className="cart-cell-actual-price">{item.price}$</div>;
   };
 
-  const getTotalDiscountPrice = () => {
-    return (
-      item.productPrice -
-      item.productPrice * (item.productDiscount / 100) * item.productQuantity
-    );
-  };
+  const getTotalDiscountPrice = () =>
+    item.price - item.price * (item.discount / 100) * item.quantity;
 
-  const getTotalPrice = () => {
-    return item.productPrice * item.productQuantity;
-  };
+  const getTotalPrice = () => item.price * item.quantity;
 
   useEffect(() => {
     if (propsData) {
@@ -78,26 +73,24 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
   }, [propsData]);
 
   return (
-    <tr>
+    <tr key={item.id}>
       <td className="cart-cell product-img">
         <div className="cart-cell-content">
           <div className="cart-product-img">
             <div className="media">
-              <img className="img" src={item.productImg} alt="cart-img" />
+              <img className="img" src={item.img} alt="cart-img" />
             </div>
           </div>
         </div>
       </td>
       <td className="cart-cell product-information">
         <div className="cart-cell-content">
-          <div className="cart-product-name text-truncate">
-            {item.productName}
-          </div>
+          <div className="cart-product-name text-truncate">{item.name}</div>
           <div className="cart-product-manufacturer text-truncate">
-            {item.productManufacturer}
+            {item.manufacturer}
           </div>
           <div className="cart-product-description text-truncate">
-            {item.productDescription}
+            {item.description}
           </div>
         </div>
       </td>
@@ -108,6 +101,7 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
         <div className="cart-cell-content">
           <div className="cart-quantity">
             <button
+              type="button"
               className="cart-quantity-btn has-icon"
               onClick={() =>
                 changeQuantityHandler(DECREASE_QUANTITY, item.productId)
@@ -115,8 +109,9 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
             >
               <FaCaretLeft />
             </button>
-            <div className="cart-quantity-current">{item.productQuantity}</div>
+            <div className="cart-quantity-current">{item.quantity}</div>
             <button
+              type="button"
               className="cart-quantity-btn has-icon"
               onClick={() =>
                 changeQuantityHandler(INCREASE_QUANTITY, item.productId)
@@ -129,7 +124,7 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
       </td>
       <td className="cart-cell">
         <div className="cart-cell-content">
-          {item.productDiscount
+          {item.discount
             ? `${getTotalDiscountPrice()}$`
             : `${getTotalPrice()}$`}
         </div>
@@ -137,6 +132,7 @@ const CartItem: React.FC<CartItemProps> = ({ propsData }) => {
       <td className="cart-cell">
         <div className="cart-cell-content">
           <button
+            type="button"
             className="cart-btn-remove has-icon"
             onClick={() => {
               removeFromCartHandler(item.productId);

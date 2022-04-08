@@ -1,2 +1,2 @@
-export const TITLE = 'cosmetics';
-export const SUBTITLE = 'online store';
+export const TITLE = "cosmetics";
+export const SUBTITLE = "online store";

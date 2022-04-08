@@ -1,23 +1,26 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { switchTheme } from '../../actions';
-import { RootState } from '../../reducers/rootReducer';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { switchTheme } from "../../store/ui/actions";
+import { RootState } from "../../store/rootReducer";
 
 const ThemeSwitch: React.FC = () => {
-  const isLight = useSelector((state: RootState) => state.theme.isLight);
+  const isDark = useSelector(
+    (state: RootState) => state.uiSettings.isDarkTheme
+  );
   const dispatch = useDispatch();
   const themeSwitchHandler = () => {
-    dispatch(switchTheme(!isLight));
+    dispatch(switchTheme(!isDark));
   };
   return (
-    <div
-      className={`theme-switch ${isLight ? '' : 'is-dark'}`}
+    <button
+      type="button"
+      className={`theme-switch ${isDark ? "is-dark" : ""}`}
       onClick={() => {
         themeSwitchHandler();
       }}
     >
-      <div className="theme-switch-check"></div>
-    </div>
+      <div className="theme-switch-check" />
+    </button>
   );
 };
 

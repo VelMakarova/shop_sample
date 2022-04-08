@@ -1,24 +1,31 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import MainRouter from './Router';
-import { useDispatch } from 'react-redux';
-import { fetchData, fetchUser } from './actions';
-import { FETCH_PRODUCTS } from './types';
-import { BASE_URL } from './constants/database';
-import routes from './constants/routes';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import MainRouter from "./Router";
+import fetchAllProducts from "./store/products/actions";
+import { setUser } from "./store/user/actions";
+import BASE_URL from "./api";
+import routes from "./navigation/routes";
+import { initCart } from "./store/cart/actions";
+import IntlProviderWrapper from "./components/IntlProviderWrapper/IntlProviderWrapper";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = window.localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
+    const email = String(localStorage.getItem("userMail"));
     if (token) {
-      dispatch(fetchUser());
+      dispatch(setUser(email));
+      dispatch(initCart());
+      dispatch(fetchAllProducts(`${BASE_URL}${routes.PRODUCTS_ROUTE}`));
     }
-    dispatch(fetchData(FETCH_PRODUCTS, `${BASE_URL}${routes.PRODUCTS_ROUTE}`));
   }, []);
 
-  return <MainRouter />;
+  return (
+    <IntlProviderWrapper>
+      <MainRouter />
+    </IntlProviderWrapper>
+  );
 };
 
 export default App;

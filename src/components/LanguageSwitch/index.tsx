@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { RUS, ENG } from '../../constants/languages.js';
-import { switchLanguage } from '../../actions';
-import { SHOW_ENG, SHOW_RUS } from '../../types';
-import { RootState } from '../../reducers/rootReducer';
+import React, { useState } from "react";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { switchLanguage } from "../../store/ui/actions";
+import { RootState } from "../../store/rootReducer";
+import Language from "../../constants/language";
 
-const LanguageSwitsh: React.FC = () => {
+const LanguageSwitch: React.FC = () => {
   const dispatch = useDispatch();
-  const { language } = useSelector((state: RootState) => state.language);
+  const language = useSelector((state: RootState) => state.uiSettings.language);
   const [isOpen, setOpen] = useState(false);
-  const switchClass = isOpen ? 'lang-switch is-open' : 'lang-switch';
-
-  const setEng = () => dispatch(switchLanguage(SHOW_ENG, ENG));
-  const setRus = () => dispatch(switchLanguage(SHOW_RUS, RUS));
+  const switchClass = isOpen ? "lang-switch is-open" : "lang-switch";
 
   return (
-    <div className={switchClass} onClick={() => setOpen(!isOpen)}>
+    <div
+      tabIndex={0}
+      role="button"
+      className={switchClass}
+      onClick={() => setOpen(!isOpen)}
+      onKeyDown={() => setOpen(!isOpen)}
+    >
       <div className="lang-switch-trigger">
         {language}
         <div className="lang-switch-arrow has-icon">
@@ -24,15 +26,27 @@ const LanguageSwitsh: React.FC = () => {
         </div>
       </div>
       <ul className="lang-switch-dropdown">
-        <li className="lang-switch-option" onClick={() => setEng()}>
-          {ENG}
+        <li className="lang-switch-option">
+          <button
+            className="lang-switch-btn"
+            type="button"
+            onClick={() => dispatch(switchLanguage(Language.en))}
+          >
+            {Language.en}
+          </button>
         </li>
-        <li className="lang-switch-option" onClick={() => setRus()}>
-          {RUS}
+        <li className="lang-switch-option">
+          <button
+            className="lang-switch-btn"
+            type="button"
+            onClick={() => dispatch(switchLanguage(Language.ru))}
+          >
+            {Language.ru}
+          </button>
         </li>
       </ul>
     </div>
   );
 };
 
-export default LanguageSwitsh;
+export default LanguageSwitch;

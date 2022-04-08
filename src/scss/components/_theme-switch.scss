@@ -4,6 +4,7 @@
   width: 36px;
   border-radius: 15px;
   background-color: $black;
+  border: none;
   transition: all .2s ease;
 
   &.is-dark {
@@ -21,6 +22,7 @@
   border-radius: 100%;
   background-color: $light-gray;
   transition: all .2s ease;
+  border: none;
 
   .is-dark & {
     left: 18px;

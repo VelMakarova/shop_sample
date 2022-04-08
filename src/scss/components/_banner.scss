@@ -3,7 +3,7 @@
 }
 
 .banner-content {
-  @extend.container;
+  @extend .container;
   display: grid;
   grid-template-rows: 180px 250px;
   grid-template-columns: 1fr;

@@ -2,6 +2,7 @@
   padding: 30px 20px;
   min-width: 0%;
 }
+
 .categories-content {
   @extend .container;
   display: grid;
@@ -32,13 +33,16 @@
   &.perfumes {
     grid-area: perfumes;
   }
+
   &.organic {
     grid-area: organic;
     min-width: 0%;
   }
+
   &.makeup {
     grid-area: makeup;
   }
+
   &.care {
     grid-area: care;
   }
@@ -72,4 +76,5 @@
   display: block;
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }

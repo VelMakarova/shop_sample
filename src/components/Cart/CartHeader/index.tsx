@@ -1,34 +1,41 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../reducers/rootReducer';
-import CART_TITLES from '../../../constants/cartTitles';
+import React from "react";
+import { useSelector } from "react-redux";
+import { FormattedMessage } from "react-intl";
+import { RootState } from "../../../store/rootReducer";
 
 const CartHeader: React.FC = () => {
-  const { language } = useSelector((state: RootState) => state.language);
-  const { isMobile } = useSelector((state: RootState) => state.isMobile);
+  const { isMobile } = useSelector((state: RootState) => state.uiSettings);
   const colSpanSize = isMobile ? 1 : 2;
-
-  const renderItems = () => {
-    const currentLangPack = CART_TITLES.find(
-      (item) => language === item.language
-    );
-    const items = currentLangPack!.items.map((item, index) => {
-      return (
-        <th
-          key={index}
-          colSpan={index ? 1 : colSpanSize}
-          className="cart-head-cell"
-        >
-          <div className="cart-head-content">{item}</div>
-        </th>
-      );
-    });
-    return items;
-  };
 
   return (
     <thead>
-      <tr>{renderItems()}</tr>
+      <tr>
+        <th colSpan={colSpanSize} className="cart-head-cell">
+          <div className="cart-head-content">
+            <FormattedMessage id="cart_product" />
+          </div>
+        </th>
+        <th colSpan={1} className="cart-head-cell">
+          <div className="cart-head-content">
+            <FormattedMessage id="cart_price" />
+          </div>
+        </th>
+        <th colSpan={1} className="cart-head-cell">
+          <div className="cart-head-content">
+            <FormattedMessage id="cart_quantity" />
+          </div>
+        </th>
+        <th colSpan={1} className="cart-head-cell">
+          <div className="cart-head-content">
+            <FormattedMessage id="cart_total" />
+          </div>
+        </th>
+        <th colSpan={1} className="cart-head-cell">
+          <div className="cart-head-content">
+            <FormattedMessage id="cart_remove" />
+          </div>
+        </th>
+      </tr>
     </thead>
   );
 };

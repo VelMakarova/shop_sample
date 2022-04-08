@@ -1,18 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { FaSearch, FaUserAlt, FaHeart, FaShoppingBasket, FaSignOutAlt } from 'react-icons/fa';
-import { Link, useHistory } from 'react-router-dom';
-import routes from '../../constants/routes';
-import { signoutUser } from '../../actions';
+import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  FaSearch,
+  FaUserAlt,
+  FaHeart,
+  FaShoppingBasket,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import routes from "../../navigation/routes";
+import { logoutUser } from "../../store/auth/actions";
 
 const Subnav: React.FC = () => {
-  //const history = useHistory();
   const dispatch = useDispatch();
 
   const signOutHandler = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(signoutUser())
-  }
+    dispatch(logoutUser());
+  };
 
   return (
     <div className="subnav">
@@ -37,8 +42,12 @@ const Subnav: React.FC = () => {
             <FaShoppingBasket />
           </Link>
         </li>
-        <li className="subnav-option" >
-          <Link onClick={signOutHandler} className="subnav-link has-icon" to={routes.LOGIN_ROUTE}>
+        <li className="subnav-option">
+          <Link
+            onClick={signOutHandler}
+            className="subnav-link has-icon"
+            to={routes.LOGIN_ROUTE}
+          >
             <FaSignOutAlt />
           </Link>
         </li>

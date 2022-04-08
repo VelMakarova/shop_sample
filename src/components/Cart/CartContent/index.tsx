@@ -1,34 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import CartHeader from '../CartHeader';
-import CartItem from '../CartItem';
-import CartTotal from '../CartTotal';
-import { fetchUserData, fetchUser } from '../../../actions';
-import { RootState } from '../../../reducers/rootReducer';
-import { CartProduct } from '../../../interfaces/index';
-import { FETCH_CART_DATA } from '../../../types';
+import React from "react";
+import { useSelector } from "react-redux";
+import CartHeader from "../CartHeader";
+import CartItem from "../CartItem";
+import CartTotal from "../CartTotal";
+import CartEmpty from "../CartEmpty";
+import { RootState } from "../../../store/rootReducer";
+import { CartProduct } from "../../../types";
 
 const CartContent: React.FC = () => {
-  const dispatch = useDispatch();
-  const cart = useSelector((state: RootState) => state.user.user.userCart);
+  const cart = useSelector((state: RootState) => state.cart);
 
-  useEffect(() => {
-    dispatch(fetchUser());
-    dispatch(fetchUserData(FETCH_CART_DATA, 'userCart'));
-  }, []);
-
-  const empty = (
-    <tr>
-      <td colSpan={6}>
-        <div className="cart-empty-title">Cart is empty:(</div>
-      </td>
-    </tr>
-  );
-
-  const cartItems = () => {
+  const renderCartItems = () => {
     if (cart === undefined || !cart.length) {
-      return empty;
+      return <CartEmpty />;
     }
     return cart.map((item: CartProduct) => (
       <CartItem key={item.productId} propsData={item} />
@@ -42,19 +26,23 @@ const CartContent: React.FC = () => {
           <CartHeader />
           <tbody
             className={`tbody ${
-              cart === undefined || !cart.length ? '' : 'has-borders'
+              cart === undefined || !cart.length ? "" : "has-borders"
             }`}
           >
-            {cartItems()}
+            {renderCartItems()}
           </tbody>
         </table>
         <div className="cart-controls">
           <div className="cart-control-continue">
-            <button className="btn-outline">CONTINUE SHOPPING</button>
+            <a href="/" className="btn-outline">
+              CONTINUE SHOPPING
+            </a>
           </div>
           <div className="cart-control-total">
             <CartTotal />
-            <button className="btn-primary">Go to checkout</button>
+            <button className="btn-primary" type="button">
+              Go to checkout
+            </button>
           </div>
         </div>
       </div>

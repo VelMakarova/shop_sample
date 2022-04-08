@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../reducers/rootReducer';
-import { CartProduct } from '../../../interfaces/index';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { FormattedMessage } from "react-intl";
+import { RootState } from "../../../store/rootReducer";
+import { CartProduct } from "../../../types";
 
 const CartTotal: React.FC = () => {
   const [cartItems, setCartItems] = useState([]);
-  const cart = useSelector((state: RootState) => state.user.user.userCart);
+  const cart = useSelector((state: RootState) => state.user.userCart);
   useEffect(() => {
     if (cart) {
       setCartItems(cart);
@@ -16,8 +17,7 @@ const CartTotal: React.FC = () => {
     let sum: number = 0;
 
     cartItems.forEach((item: CartProduct) => {
-      const itemSum =
-        item.productPrice * (item.productDiscount / 100) * item.productQuantity;
+      const itemSum = item.price * (item.discount / 100) * item.quantity;
       sum += itemSum;
     });
     return Number(sum.toFixed(2));
@@ -27,12 +27,11 @@ const CartTotal: React.FC = () => {
     let sum: number = 0;
 
     cartItems.forEach((item: CartProduct) => {
-      if (item.productDiscount) {
-        let sumItem =
-          item.productPrice - item.productPrice * (item.productDiscount / 100);
-        sum += sumItem * item.productQuantity;
+      if (item.discount) {
+        const sumItem = item.price - item.price * (item.discount / 100);
+        sum += sumItem * item.quantity;
       } else {
-        sum += item.productPrice * item.productQuantity;
+        sum += item.price * item.quantity;
       }
     });
     return Number(sum.toFixed(2));
@@ -43,7 +42,9 @@ const CartTotal: React.FC = () => {
       <tbody>
         <tr className="cart-total-discount">
           <td>
-            <div className="cart-total-content content-label">discount</div>
+            <div className="cart-total-content content-label">
+              <FormattedMessage id="cart_discount" />
+            </div>
           </td>
           <td>
             <div className="cart-total-content content-value">
@@ -53,7 +54,9 @@ const CartTotal: React.FC = () => {
         </tr>
         <tr className="cart-total-sum">
           <td>
-            <div className="cart-total-content content-label">total to pay</div>
+            <div className="cart-total-content content-label">
+              <FormattedMessage id="cart_total_to_pay" />
+            </div>
           </td>
           <td>
             <div className="cart-total-content content-value">

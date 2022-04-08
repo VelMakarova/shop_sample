@@ -1,9 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const AddressesTab: React.FC = () => {
-  return (
-    <div>Address</div>
-  )
-}
+const AddressesTab: React.FC = () => <div>Address</div>;
 
 export default AddressesTab;

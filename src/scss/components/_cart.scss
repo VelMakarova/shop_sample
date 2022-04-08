@@ -20,6 +20,7 @@
   text-transform: uppercase;
   padding: 5px 0;
   border-bottom: 1px solid $light-gray;
+
   .cart-head-cell:first-child & {
     text-align: left;
   }
@@ -52,16 +53,19 @@
   padding: 10px 0;
   border-bottom: 1px solid $light-gray;
   font-size: 12px;
+
   .product-information & {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     font-family: 'Poppins-Light', sans-serif;
   }
+
   &.price-content {
     display: flex;
     flex-direction: column;
   }
+
   @media (min-width: $breakpoint-tablet) {
     height: 113px;
     font-size: 14px;
@@ -80,6 +84,7 @@
   width: 22px;
   border-radius: 5px;
   border: 1px solid $light-gray;
+
   .cart-product-check > input[type=checkbox].visually-hidden:checked + & {
     background-repeat: no-repeat;
     background-position: center;
@@ -124,7 +129,7 @@
   @include themify($themes) {
     color: themed('text-color');
   }
-} 
+}
 
 .cart-btn-remove {
   @extend %btn;
@@ -132,9 +137,11 @@
   width: 15px;
   opacity: .5;
   padding: 0;
+
   &:hover {
     opacity: 1;
   }
+
   @media (min-width: $breakpoint-tablet) {
     height: 30px;
     width: 30px;
@@ -182,12 +189,15 @@
   font-size: 16px;
   text-transform: uppercase;
   text-align: right;
+
   .cart-total-discount & {
     color: $green;
   }
+
   &.content-value {
     padding: 0 35px;
   }
+
   .cart-total-selected & {
     @media (min-width: $breakpoint-tablet) {
       padding-bottom: 20px;

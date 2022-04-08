@@ -1,9 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const FavsTab: React.FC = () => {
-  return (
-    <div>Favs</div>
-  )
-}
+const FavsTab: React.FC = () => <div>Favs</div>;
 
 export default FavsTab;

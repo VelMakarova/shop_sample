@@ -22,6 +22,7 @@
   width: 22px;
   padding: 0;
   color: $light-gray;
+
   &:hover,
   &.is-active {
     color: darken($pink, 20%);
@@ -60,7 +61,7 @@
 
 }
 
-.product-titles  {
+.product-titles {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
